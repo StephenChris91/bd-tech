@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Avatar } from "flowbite-react";
 import { FaHeart, FaEnvelope, FaStar } from "react-icons/fa";
-import FavButton from "../Components/FavButton";
 
 //import default image
 import defaultImg from "../Images/avatar2.png";
@@ -66,7 +65,7 @@ const ProfileDetails = () => {
           >
             <span
               id="blackOverlay"
-              className="w-full h-full absolute opacity-50 bg-black"
+              className="w-full h-full absolute bg-black opacity-96"
             ></span>
           </div>
           <div
@@ -91,7 +90,7 @@ const ProfileDetails = () => {
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div className="relative flex flex-col min-w-0 break-words bg-gray-100 w-full mb-6 shadow-xl rounded-lg -mt-64">
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -104,9 +103,9 @@ const ProfileDetails = () => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                    <div className="py-6 px-3 ml-96 mt-32 sm:mt-0">
                       <Button onClick={handleButtonClick}>
-                        <FaStar />
+                        <FaStar className="mr-5" />
                         Favorites
                       </Button>
                     </div>
@@ -142,7 +141,7 @@ const ProfileDetails = () => {
                 </div>
                 <div className="text-center mt-12">
                   <Avatar
-                    img={profile.avatar ? profile.avatar : defaultImg}
+                    img={defaultImg}
                     size="xl"
                     rounded={true}
                     bordered={true}

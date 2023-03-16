@@ -11,7 +11,6 @@ import defaultImg from "../Images/avatar2.png";
 const Profile = ({ id, name, city, age }) => {
   const [response, makePostRequest] = usePostRequest();
 
-
   const handleButtonClick = async () => {
     const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
 

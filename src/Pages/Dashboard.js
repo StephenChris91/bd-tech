@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { HiUserGroup } from "react-icons/hi";
 
-import axios from "axios";
 import useGetProfile from "../Hooks/useGetProfile";
 
 import Profile from "./Profile";
@@ -22,9 +20,9 @@ const Dashboard = () => {
 
   return (
     <div id="user-wrapper">
-      <div className="text-center mb-5">
-        <h2 className="flex text-center font-bold text-2xl">
-          <HiUserGroup />
+      <div className="w-full bg-blue-800 flex justify-center text-white p-5 text-center mx-auto mb-5">
+        <h2 className="flex items-center justify-between font-bold text-2xl">
+          <HiUserGroup className="mr-3" />
           All Profiles
         </h2>
       </div>
