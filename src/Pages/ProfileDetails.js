@@ -13,16 +13,22 @@ import useGetProfile from "../Hooks/useGetProfile";
 
 const ProfileDetails = () => {
   const { id } = useParams();
-  const [userProfile, setUserProfile] = useState(null);
   const [response, makePostRequest] = usePostRequest();
-  const [fetchProfileById, profile] = useGetProfile();
-  console.log(profile);
+  const { fetchProfileById, profile } = useGetProfile();
+  const [currprofile, setCurrProfile] = useState(null);
 
-  //console.log(makePostRequest(id));
+  const [imgSrc, setImgSrc] = useState(defaultImg);
+
+  const handleImageError = (img) => {
+    setImgSrc(img);
+  };
+
+  //const { profile } = fetchByProfileId(id);
+
+  console.log(fetchProfileById);
 
   const handleButtonClick = async () => {
     const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
-    // const data = id;
 
     const data = {
       profileId: profile.id,
@@ -33,8 +39,14 @@ const ProfileDetails = () => {
   };
 
   useEffect(() => {
-    fetchProfileById(id);
-  }, [id]);
+    const fetchData = async () => {
+      const response = await fetchProfileById(id);
+      setCurrProfile(response);
+      console.log(profile);
+    };
+
+    fetchData();
+  }, []);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -86,7 +98,7 @@ const ProfileDetails = () => {
                     <div className="relative">
                       <img
                         alt="..."
-                        src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                        src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80"
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -130,11 +142,12 @@ const ProfileDetails = () => {
                 </div>
                 <div className="text-center mt-12">
                   <Avatar
-                    img={defaultImg}
+                    img={profile.avatar ? profile.avatar : defaultImg}
                     size="xl"
                     rounded={true}
                     bordered={true}
                     color="light"
+                    onError={() => handleImageError(imgSrc)}
                   />
                   <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
                     <span className="">{profile.name}</span>

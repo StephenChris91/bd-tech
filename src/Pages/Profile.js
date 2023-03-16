@@ -11,7 +11,6 @@ import defaultImg from "../Images/avatar2.png";
 const Profile = ({ id, name, city, age }) => {
   const [response, makePostRequest] = usePostRequest();
 
-  // console.log(makePostRequest(id));
 
   const handleButtonClick = async () => {
     const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
@@ -23,7 +22,6 @@ const Profile = ({ id, name, city, age }) => {
     await makePostRequest(url, data);
     console.log(response);
   };
-  //console.log(handleClick);
   return (
     <>
       <div className="max-w-sm">

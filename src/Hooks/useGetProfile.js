@@ -18,13 +18,13 @@ const useGetProfile = () => {
 
   const fetchProfileById = async (id) => {
     const response = await fetch(
-      `https://fa.bdtechnologies.ch/api/v1/profiles${id}`
+      `https://fa.bdtechnologies.ch/api/v1/profiles/${id}`
     );
     const data = await response.json();
     setProfile(data);
   };
 
-  return [profiles, profile, fetchProfileById];
+  return { profiles, profile, fetchProfileById };
 };
 
 export default useGetProfile;

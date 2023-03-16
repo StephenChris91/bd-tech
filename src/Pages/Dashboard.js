@@ -12,26 +12,28 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const [userProfiles, setUserProfiles] = useState(null);
-  const [profiles] = useGetProfile();
+  const { profiles } = useGetProfile();
 
-  console.log(profiles);
+  console.log(profiles.profiles);
 
   useEffect(() => {
-    setUserProfiles(profiles);
-  }, []);
-
+    setUserProfiles(profiles.profiles);
+  }, [profiles.profiles]);
 
   return (
     <div id="user-wrapper">
-      <h2 className="flex text-center font-bold text-2xl">
-        <HiUserGroup />
-        All Profiles
-      </h2>
+      <div className="text-center mb-5">
+        <h2 className="flex text-center font-bold text-2xl">
+          <HiUserGroup />
+          All Profiles
+        </h2>
+      </div>
+
       <div className="grid grid-cols-3 mx-auto gap-5">
         {!userProfiles ? (
           <p>No Profiles Found</p>
         ) : (
-          userProfiles.profiles.map((item) => (
+          userProfiles.map((item) => (
             <div key={item.id}>
               <Profile {...item} id={item.id} />
             </div>
