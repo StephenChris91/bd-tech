@@ -25,7 +25,7 @@ const Dashboard = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-1 mx-auto gap-5">
+      <div className="grid lg:grid-cols-3 sm:grid-cols-1 mx-auto gap-5">
         {!userProfiles ? (
           <p>No Profiles Found</p>
         ) : (
