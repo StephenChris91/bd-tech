@@ -5,11 +5,12 @@ function usePostProfile() {
 
   const makePostRequest = async (url, data) => {
     console.log(JSON.stringify(data));
+    data = {
+      method: "POST",
+      body: JSON.stringify(data),
+    };
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(url, data);
 
       const responseData = await response.json();
       setResponse(responseData);

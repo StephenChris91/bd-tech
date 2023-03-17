@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Button, Avatar } from "flowbite-react";
 import { FaHeart, FaEnvelope, FaStar } from "react-icons/fa";
 
@@ -14,7 +14,7 @@ const ProfileDetails = () => {
   const { id } = useParams();
   const [response, makePostRequest] = usePostRequest();
   const { fetchProfileById, profile } = useGetProfile();
-  const [currprofile, setCurrProfile] = useState(null);
+  const [currProfile, setCurrProfile] = useState(null);
 
   const [imgSrc, setImgSrc] = useState(defaultImg);
 
@@ -24,7 +24,7 @@ const ProfileDetails = () => {
 
   //const { profile } = fetchByProfileId(id);
 
-  console.log(fetchProfileById);
+  //console.log(profile);
 
   const handleButtonClick = async () => {
     const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
@@ -41,7 +41,7 @@ const ProfileDetails = () => {
     const fetchData = async () => {
       const response = await fetchProfileById(id);
       setCurrProfile(response);
-      console.log(profile);
+      //console.log(currProfile);
     };
 
     fetchData();
@@ -103,13 +103,16 @@ const ProfileDetails = () => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div className="py-6 px-3 ml-96 mt-32 sm:mt-0">
+                    <div className="py-6 px-3 ml-80 mt-32 sm:mt-0">
                       <Button onClick={handleButtonClick}>
                         <FaStar className="mr-5" />
                         Favorites
                       </Button>
                     </div>
                   </div>
+                  <Link to="/" className="mt-10 mr-1">
+                    <Button className="bg-blue-700">Back</Button>
+                  </Link>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">

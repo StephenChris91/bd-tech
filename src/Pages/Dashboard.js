@@ -12,8 +12,6 @@ const Dashboard = () => {
   const [userProfiles, setUserProfiles] = useState(null);
   const { profiles } = useGetProfile();
 
-  console.log(profiles.profiles);
-
   useEffect(() => {
     setUserProfiles(profiles.profiles);
   }, [profiles.profiles]);
@@ -27,7 +25,7 @@ const Dashboard = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-3 mx-auto gap-5">
+      <div className="grid grid-cols-3 sm:grid-cols-1 mx-auto gap-5">
         {!userProfiles ? (
           <p>No Profiles Found</p>
         ) : (
