@@ -4,35 +4,39 @@ import { Button, Avatar, Rating } from "flowbite-react";
 import { FaHeart, FaEnvelope, FaStar } from "react-icons/fa";
 
 //hook
-import usePostRequest from "../Hooks/usePostProfile";
+import useToggleFavorite from "../Hooks/usePostProfile";
 
 import defaultImg from "../Images/avatar2.png";
 
 const Profile = ({ id, name, city, age }) => {
-  const [response, makePostRequest] = usePostRequest();
+  const [isFavorite, toggleFavorite] = useToggleFavorite();
 
   const handleButtonClick = async () => {
-    const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
-
-    const data = {
-      profileId: id,
-    };
-
-    await makePostRequest(url, data);
-    console.log(response);
+    toggleFavorite(id);
   };
   return (
     <>
       <div className="max-w-sm">
         <Card className="overflow-hidden">
           <div className="w-full bg-slate-900 p-10">
-            <Button
-              className="z-50"
-              icon={<FaStar />}
-              onClick={handleButtonClick}
-            >
-              <FaStar />
-            </Button>
+            {isFavorite ? (
+              <Button
+                className="z-50"
+                icon={<FaStar className="addFavorite" />}
+                onClick={handleButtonClick}
+              >
+                <FaStar className="text-yellow-400" />
+              </Button>
+            ) : (
+              <Button
+                className="z-50"
+                icon={<FaStar className="removeFavorite" />}
+                onClick={handleButtonClick}
+              >
+                <FaStar />
+              </Button>
+            )}
+
             <Link to={`/profile/${id}`}>
               <Avatar
                 img={defaultImg}

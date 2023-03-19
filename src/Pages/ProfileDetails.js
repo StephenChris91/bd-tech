@@ -2,19 +2,27 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button, Avatar } from "flowbite-react";
 import { FaHeart, FaEnvelope, FaStar } from "react-icons/fa";
+import { SyncLoader } from "react-spinners";
 
 //import default image
 import defaultImg from "../Images/avatar2.png";
 
 //hook
-import usePostRequest from "../Hooks/usePostProfile";
+import useToggleFavorite from "../Hooks/usePostProfile";
 import useGetProfile from "../Hooks/useGetProfile";
 
 const ProfileDetails = () => {
   const { id } = useParams();
-  const [response, makePostRequest] = usePostRequest();
   const { fetchProfileById, profile } = useGetProfile();
   const [currProfile, setCurrProfile] = useState(null);
+
+  const override = {
+    display: "block",
+    margin: "100 100",
+    borderColor: "blue",
+  };
+
+  const [isFavorite, toggleFavorite] = useToggleFavorite();
 
   const [imgSrc, setImgSrc] = useState(defaultImg);
 
@@ -22,33 +30,30 @@ const ProfileDetails = () => {
     setImgSrc(img);
   };
 
-  //const { profile } = fetchByProfileId(id);
-
   //console.log(profile);
 
   const handleButtonClick = async () => {
-    const url = "https://fa.bdtechnologies.ch/api/v1/favorites";
-
-    const data = {
-      profileId: profile.id,
-    };
-
-    await makePostRequest(url, data);
-    console.log(response);
+    toggleFavorite(profile.id);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetchProfileById(id);
       setCurrProfile(response);
-      //console.log(currProfile);
     };
 
     fetchData();
   }, []);
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return (
+      <SyncLoader
+        className="mt-96"
+        cssOverride={override}
+        size={10}
+        color="blue"
+      />
+    );
   }
 
   return (
@@ -103,11 +108,18 @@ const ProfileDetails = () => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div className="py-6 px-3 ml-80 mt-32 sm:mt-0">
-                      <Button onClick={handleButtonClick}>
-                        <FaStar className="mr-5" />
-                        Favorites
-                      </Button>
+                    <div className="py-6 px-3 sm:ml-30 lg:ml-80 mt-32 sm:mt-0">
+                      {isFavorite ? (
+                        <Button onClick={handleButtonClick}>
+                          <FaStar className="mr-5 text-yellow-500" />
+                          Favorites
+                        </Button>
+                      ) : (
+                        <Button onClick={handleButtonClick}>
+                          <FaStar className="mr-5" />
+                          Favorites
+                        </Button>
+                      )}
                     </div>
                   </div>
                   <Link to="/" className="mt-10 mr-1">

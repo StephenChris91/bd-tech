@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { HiUserGroup } from "react-icons/hi";
+import { SyncLoader } from "react-spinners";
 
 import useGetProfile from "../Hooks/useGetProfile";
-
 import Profile from "./Profile";
 
 //styling
@@ -11,6 +11,12 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const [userProfiles, setUserProfiles] = useState(null);
   const { profiles } = useGetProfile();
+
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "blue",
+  };
 
   useEffect(() => {
     setUserProfiles(profiles.profiles);
@@ -27,7 +33,12 @@ const Dashboard = () => {
 
       <div className="grid lg:grid-cols-3 sm:grid-cols-1 mx-auto gap-5">
         {!userProfiles ? (
-          <p>No Profiles Found</p>
+          <SyncLoader
+            cssOverride={override}
+            size={10}
+            color="blue"
+            className="mt-96"
+          />
         ) : (
           userProfiles.map((item) => (
             <div key={item.id}>

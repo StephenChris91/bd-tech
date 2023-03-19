@@ -5,6 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Profile from "./Pages/Profile";
 import ProfileDetails from "./Pages/ProfileDetails";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -20,6 +23,18 @@ function App() {
           />
         </Route>
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
